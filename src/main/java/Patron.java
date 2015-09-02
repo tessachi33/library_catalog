@@ -90,7 +90,7 @@ public class Patron {
 
   public void addBook(Book book) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO patrons_books (book_id, patron_id) VALUES (:book_id, :patron_id)";
+      String sql = "INSERT INTO checkouts (book_id, patron_id) VALUES (:book_id, :patron_id)";
       con.createQuery(sql)
       .addParameter("book_id", book.getId())
       .addParameter("patron_id", this.getId())
@@ -100,7 +100,7 @@ public class Patron {
 
   public List<Book> getBooks() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT books.* FROM patrons JOIN patrons_books ON (patrons_books.patron_id = patrons.id) JOIN books ON (patrons_books.book_id = books.id) WHERE patron_id = :patron_id";
+      String sql = "SELECT books.* FROM patrons JOIN checkouts ON (checkouts.patron_id = patrons.id) JOIN books ON (checkouts.book_id = books.id) WHERE patron_id = :patron_id";
       List<Book> books = con.createQuery(sql)
       .addParameter("patron_id", this.getId())
       .executeAndFetch(Book.class);
