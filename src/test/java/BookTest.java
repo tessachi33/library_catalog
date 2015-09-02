@@ -10,13 +10,13 @@ public class BookTest {
   public void all_emptyAtFirst() {
     assertEquals(Book.all().size(), 0);
   }
-  //
-  // @Test
-  // public void equals_returnsTrueIfDescriptionsAretheSame() {
-  //   Task firstTask = new Task("Mow the lawn");
-  //   Task secondTask = new Task("Mow the lawn");
-  //   assertTrue(firstTask.equals(secondTask));
-  // }
+
+  @Test
+  public void equals_returnsTrueIfDescriptionsAretheSame() {
+    Book firstBook = new Book("Math", "Teresa", 45);
+    Book secondBook = new Book("Math", "Teresa", 45);
+    assertTrue(firstBook.equals(secondBook));
+  }
   //
   // @Test
   // public void save_savesObjectIntoDatabase() {
