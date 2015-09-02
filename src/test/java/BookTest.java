@@ -42,4 +42,18 @@ public class BookTest {
     Book savedBook = Book.find(myBook.getId());
     assertTrue(myBook.equals(savedBook));
   }
+
+  @Test
+  public void updateBookTitle() {
+    Book myBook = new Book("Mow the lawn");
+    myBook.save();
+  //  String new_title = "Math";
+    myBook.update("Math");
+    // String name = myBook.getTitle();
+    // System.out.println(name);
+    assertTrue(Book.all().get(0).getTitle().equals("Math"));
+  }
+
+
+
 }
