@@ -93,7 +93,7 @@ public class Author {
 
     public List<Book> getBooks() {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "SELECT books.* FROM authors JOIN books_authors ON (books_authors.author_id = authors.id) JOIN books ON (books_authors.book_id = books.id) WHERE author_id = :id";
+        String sql = "SELECT books.* FROM authors JOIN books_authors ON (books_authors.author_id = authors.id) JOIN books ON (books_authors.book_id = books.id) WHERE author_id = :author_id";
         List<Book> books = con.createQuery(sql)
         .addParameter("author_id", this.getId())
         .executeAndFetch(Book.class);
