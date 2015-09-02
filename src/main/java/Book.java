@@ -48,16 +48,16 @@ public class Book {
     }
   }
 
-  // public static Task find(int id) {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT * FROM tasks where id=:id";
-  //     Task task = con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeAndFetchFirst(Task.class);
-  //     return task;
-  //   }
-  // }
-  //
+  public static Book find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM books where id=:id";
+      Book book = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(Book.class);
+      return book;
+    }
+  }
+
   // public void update(String description) {
   //   try(Connection con = DB.sql2o.open()) {
   //     String sql = "UPDATE tasks SET description = :description) WHERE id = :id";

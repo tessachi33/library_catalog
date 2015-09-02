@@ -27,19 +27,19 @@ public class BookTest {
     assertTrue(savedBook.equals(myBook));
   }
 
-  // @Test
-  // public void save_assignsIdToObject() {
-  //   Book myBook = new Book("Mow the lawn");
-  //   myBook.save();
-  //   Book savedBook = Book.all().get(0);
-  //   assertEquals(myBook.getId(), savedBook.getId());
-  // }
-  //
-  // @Test
-  // public void find_findsBookInDatabase_true() {
-  //   Book myBook = new Book("Mow the lawn");
-  //   myBook.save();
-  //   Book savedBook = Book.find(myBook.getId());
-  //   assertTrue(myBook.equals(savedBook));
-  // }
+  @Test
+  public void save_assignsIdToObject() {
+    Book myBook = new Book("Math");
+    myBook.save();
+    Book savedBook = Book.all().get(0);
+    assertEquals(myBook.getId(), savedBook.getId());
+  }
+
+  @Test
+  public void find_findsBookInDatabase_true() {
+    Book myBook = new Book("Mow the lawn");
+    myBook.save();
+    Book savedBook = Book.find(myBook.getId());
+    assertTrue(myBook.equals(savedBook));
+  }
 }
