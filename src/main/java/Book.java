@@ -1,5 +1,6 @@
 import java.util.List;
 import org.sql2o.*;
+import java.util.ArrayList;
 
 public class Book {
   private int id;
@@ -59,7 +60,9 @@ public class Book {
   }
 
   public void update(String title) {
+    this.title = title;
     try(Connection con = DB.sql2o.open()) {
+
       String sql = "UPDATE books SET title = :title WHERE id = :id";
       con.createQuery(sql)
         .addParameter("title", title)
@@ -68,12 +71,34 @@ public class Book {
     }
   }
 
-  // public void delete() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //   String sql = "DELETE FROM tasks WHERE id = :id;";
-  //     con.createQuery(sql)
-  //       .addParameter("id", id)
-  //       .executeUpdate();
-  //   }
-  // }
+  public void delete() {
+    try(Connection con = DB.sql2o.open()) {
+    String sql = "DELETE FROM books WHERE id = :id;";
+      con.createQuery(sql)
+        .addParameter("id", id)
+        .executeUpdate();
+    }
+  }
+
+  public void addAuthor(Author author) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO books_authors (author_id, book_id) VALUES (:author_id, :book_id)";
+      con.createQuery(sql)
+      .addParameter("author_id", author.getId())
+      .addParameter("book_id", this.getId())
+      .executeUpdate();
+    }
+  }
+
+  public List<Author> getAuthors() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT authors.* FROM books JOIN books_authors ON (books_authors.book_id = books.id) JOIN authors ON (books_authors.author_id = authors.id) WHERE book_id = :id";
+      List<Author> authors = con.createQuery(sql)
+      .addParameter("book_id", this.getId())
+      .executeAndFetch(Author.class);
+      return authors;
+
+    }
+
+  }
 }

@@ -1,5 +1,6 @@
 import org.junit.*;
 import static org.junit.Assert.*;
+import java.util.List;
 
 public class BookTest {
 
@@ -47,13 +48,34 @@ public class BookTest {
   public void updateBookTitle() {
     Book myBook = new Book("Mow the lawn");
     myBook.save();
-  //  String new_title = "Math";
     myBook.update("science");
-    // String name = myBook.getTitle();
-    // System.out.println(name);
+     //System.out.println(myBook.getTitle());
     assertTrue(Book.all().get(0).getTitle().equals("science"));
   }
 
+  @Test
+  public void deleteBook() {
+    Book myFirstBook = new Book("Biology");
+    myFirstBook.save();
+    Book mySecondBook = new Book("Maths");
+    mySecondBook.save();
+    mySecondBook.delete();
+    assertTrue(Book.all().get(0).equals(myFirstBook));
+  }
+
+  @Test
+  public void getAuthor_returnsAllAuthors_List() {
+    Book myBook = new Book("math");
+    myBook.save();
+
+    Author myAuthor = new Author("You");
+    myAuthor.save();
+
+    myBook.addAuthor(myAuthor);
+    List savedAuthors = myBook.getAuthors();
+    assertEquals(savedAuthors.size(), 1);
+
+  }
 
 
 }
