@@ -48,10 +48,10 @@ public class BookTest {
     Book myBook = new Book("Mow the lawn");
     myBook.save();
   //  String new_title = "Math";
-    myBook.update("Math");
+    myBook.update("science");
     // String name = myBook.getTitle();
     // System.out.println(name);
-    assertTrue(Book.all().get(0).getTitle().equals("Math"));
+    assertTrue(Book.all().get(0).getTitle().equals("science"));
   }
 
 
