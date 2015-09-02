@@ -15,7 +15,7 @@ public class Patron {
     return name;
   }
 
-  public String getPhone_Number() {
+  public String getPhoneNumber() {
     return phone_number;
   }
 
@@ -33,7 +33,7 @@ public class Patron {
     } else {
       Patron newPatron = (Patron) otherPatron;
       return this.getName().equals(newPatron.getName()) &&
-             this.getPhone_number().equals(newPatron.getPhone_number()) &&
+             this.getPhoneNumber().equals(newPatron.getPhoneNumber()) &&
              this.getId() == newPatron.getId();
   }
 }

@@ -49,7 +49,6 @@ public class BookTest {
     Book myBook = new Book("Mow the lawn");
     myBook.save();
     myBook.update("science");
-     //System.out.println(myBook.getTitle());
     assertTrue(Book.all().get(0).getTitle().equals("science"));
   }
 

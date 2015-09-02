@@ -14,7 +14,7 @@ public class PatronTest {
 
   @Test
   public void equals_returnsTrueIfDescriptionsAretheSame() {
-    Patron firstPatron = new Patron("Teresa", "555", "555");
+    Patron firstPatron = new Patron("Teresa", "555");
     Patron secondPatron = new Patron("Teresa", "555");
     assertTrue(firstPatron.equals(secondPatron));
   }
@@ -45,12 +45,11 @@ public class PatronTest {
   }
 
   @Test
-  public void updatePatronTitle() {
+  public void updatePatronName() {
     Patron myPatron = new Patron("Rick", "777");
     myPatron.save();
-    myPatron.update("John", "888");
-     //System.out.println(myPatron.getTitle());
-    assertTrue(Patron.all().get(0).getTitle().equals("John", "888"));
+    myPatron.update("John");
+    assertTrue(Patron.all().get(0).getName().equals("John"));
   }
 
   @Test
@@ -68,7 +67,7 @@ public class PatronTest {
     Patron myPatron = new Patron("Alex", "333");
     myPatron.save();
 
-    Book myBook = new Book("Jack", "323");
+    Book myBook = new Book("Jack");
     myBook.save();
 
     myPatron.addBook(myBook);
