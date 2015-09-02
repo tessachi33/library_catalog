@@ -4,8 +4,7 @@ import org.sql2o.*;
 public class Book {
   private int id;
   private String title;
-  private String author;
-  private int copy_id;
+
 
   public int getId() {
     return id;
@@ -15,19 +14,9 @@ public class Book {
     return title;
   }
 
-  public String getAuthor() {
-    return author;
-  }
 
-    public int getCopy_id() {
-      return copy_id;
-    }
-
-
-  public Book(String title, String author, int copy_id) {
+  public Book(String title) {
     this.title = title;
-    this.author = author;
-    this.copy_id = copy_id;
 
   }
 
@@ -38,12 +27,9 @@ public class Book {
     } else {
       Book newBook = (Book) otherBook;
       return this.getTitle().equals(newBook.getTitle()) &&
-             this.getId() == newBook.getId()&&
-             this.getAuthor().equals(newBook.getAuthor()) &&
-             this.getCopy_id() == newBook.getCopy_id();
-    }
+             this.getId() == newBook.getId();
   }
-
+}
 
   public static List<Book> all() {
     String sql = "SELECT * FROM books";
@@ -51,17 +37,17 @@ public class Book {
       return con.createQuery(sql).executeAndFetch(Book.class);
     }
   }
-  //
-  // public void save() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "INSERT INTO tasks(description) VALUES (:description)";
-  //     this.id = (int) con.createQuery(sql, true)
-  //       .addParameter("description", description)
-  //       .executeUpdate()
-  //       .getKey();
-  //   }
-  // }
-  //
+
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO books (title) VALUES (:title)";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("title", title)
+        .executeUpdate()
+        .getKey();
+    }
+  }
+
   // public static Task find(int id) {
   //   try(Connection con = DB.sql2o.open()) {
   //     String sql = "SELECT * FROM tasks where id=:id";

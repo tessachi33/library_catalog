@@ -13,32 +13,33 @@ public class BookTest {
 
   @Test
   public void equals_returnsTrueIfDescriptionsAretheSame() {
-    Book firstBook = new Book("Math", "Teresa", 45);
-    Book secondBook = new Book("Math", "Teresa", 45);
+    Book firstBook = new Book("Math");
+    Book secondBook = new Book("Math");
     assertTrue(firstBook.equals(secondBook));
   }
-  //
-  // @Test
-  // public void save_savesObjectIntoDatabase() {
-  //   Task myTask = new Task("Mow the lawn");
-  //   myTask.save();
-  //   Task savedTask = Task.all().get(0);
-  //   assertTrue(savedTask.equals(myTask));
-  // }
-  //
+
+  @Test
+  public void save_savesObjectIntoDatabase() {
+    Book myBook = new Book("Math");
+    myBook.save();
+
+    Book savedBook = Book.all().get(0);
+    assertTrue(savedBook.equals(myBook));
+  }
+
   // @Test
   // public void save_assignsIdToObject() {
-  //   Task myTask = new Task("Mow the lawn");
-  //   myTask.save();
-  //   Task savedTask = Task.all().get(0);
-  //   assertEquals(myTask.getId(), savedTask.getId());
+  //   Book myBook = new Book("Mow the lawn");
+  //   myBook.save();
+  //   Book savedBook = Book.all().get(0);
+  //   assertEquals(myBook.getId(), savedBook.getId());
   // }
   //
   // @Test
-  // public void find_findsTaskInDatabase_true() {
-  //   Task myTask = new Task("Mow the lawn");
-  //   myTask.save();
-  //   Task savedTask = Task.find(myTask.getId());
-  //   assertTrue(myTask.equals(savedTask));
+  // public void find_findsBookInDatabase_true() {
+  //   Book myBook = new Book("Mow the lawn");
+  //   myBook.save();
+  //   Book savedBook = Book.find(myBook.getId());
+  //   assertTrue(myBook.equals(savedBook));
   // }
 }
