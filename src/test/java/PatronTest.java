@@ -63,18 +63,15 @@ public class PatronTest {
   }
 
   @Test
-  public void getBook_returnsAllBooks_List() {
-    Patron myPatron = new Patron("Alex", "333");
-    myPatron.save();
-
-    Book myBook = new Book("Jack");
-    myBook.save();
-
-    myPatron.addBook(myBook);
-    List savedBooks = myPatron.getBooks();
-    assertEquals(savedBooks.size(), 1);
-
-  }
+public void getCopies_returnsCheckedOutCopies() {
+  Patron instance = new Patron("Seymour Buttz");
+  instance.save();
+  Copy newCopy = new Copy(1);
+  newCopy.save();
+  Copy savedCopy = Copy.find(newCopy.getId());
+  savedCopy.checkouts(instance);
+  assertTrue(instance.getCopies().contains(savedCopy));
+}
 
 
 }
